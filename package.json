@@ -4,7 +4,7 @@
   "description": "APIs for an E-commerce application",
   "main": "index.js",
   "scripts": {
-    
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
     "JWT"
   ],
   "author": "AKG",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^3.0.3"
+  }
 }
