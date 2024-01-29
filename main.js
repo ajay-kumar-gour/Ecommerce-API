@@ -30,9 +30,32 @@ app.get("/product", async (req, res) => {
     res.status(200).send(allProducts);
   } catch (error) {
     console.log(error);
-    res.send(501).send({ message: "Internal Server Error" });
+    res.status(501).send({ message: "Internal Server Error" });
   }
 });
+
+// READ a data by a parameter example: id, name etc
+
+app.get("/product/:name", async (req, res) => {
+  try {
+    const name = req.params.name;
+    console.log(name);
+    const data = await Product.find({
+      name: { $regex: new RegExp(name, "i") },
+    });
+    if (!data) {
+      return res.status(400).send({ error: "Product Not found" });
+    }
+    if (data.length == 0) {
+      return res.status(400).send({ error: "Product Not found" });
+    }
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(501).send({ message: "Internal Server Error" });
+  }
+});
+
 app.get("/main", (req, res) => {
   res.status(200).send("<h1>Main Application</h1>");
 });
