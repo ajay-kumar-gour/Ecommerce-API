@@ -16,9 +16,21 @@ app.post("/product", async (req, res) => {
     const newProduct = new Product(data);
     const savedProduct = await newProduct.save();
     res.status(201).send(savedProduct);
-  } catch (err) {
+  } catch (error) {
     console.log(error);
     res.status(501).send({ message: "Internal Server Error" });
+  }
+});
+
+// READ All (GET) Data
+
+app.get("/product", async (req, res) => {
+  try {
+    const allProducts = await Product.find();
+    res.status(200).send(allProducts);
+  } catch (error) {
+    console.log(error);
+    res.send(501).send({ message: "Internal Server Error" });
   }
 });
 app.get("/main", (req, res) => {
