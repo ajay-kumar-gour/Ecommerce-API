@@ -1,6 +1,8 @@
 const express = require("express");
 require("dotenv").config();
 
+const dbConnection = require("./database");
+
 // console.log(process.env.PORT);
 const app = express();
 const PORT = process.env.PORT || 8000; // do not put semicolon on the env file
