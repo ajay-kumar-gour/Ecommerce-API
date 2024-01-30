@@ -13,9 +13,16 @@ console.log(PORT);
 app.post("/product", async (req, res) => {
   try {
     const data = req.body;
-    const newProduct = new Product(data);
-    const savedProduct = await newProduct.save();
-    res.status(201).send(savedProduct);
+
+    if (Array.isArray(data)) {
+      const savedProduct = await Product.insertMany(data);
+      res.status(201).send(savedProduct);
+    } else {
+      const newProduct = new Product(data);
+      const savedProduct = await newProduct.save();
+      res.status(201).send(savedProduct);
+    }
+    console.log(data);
   } catch (error) {
     console.log(error);
     res.status(501).send({ message: "Internal Server Error" });
