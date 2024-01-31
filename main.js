@@ -66,16 +66,26 @@ app.get("/product/:name", async (req, res) => {
 
 //  DELETE Product By id
 
-app.delete("/product/:id", (req, res) => {
-  const productID = req.params.id;
-  console.log(productID);
-  if (!mongoose.Types.ObjectId.isValid(productID)) {
-    return res.status(400).json({ message: "Prouduct ID is Invalid" });
+app.delete("/product/:id", async (req, res) => {
+  try {
+    // const productID = req.params.id;
+    console.log(productID);
+    if (!mongoose.Types.ObjectId.isValid(productID)) {
+      return res.status(400).send({ message: "Prouduct ID is Invalid" });
+    }
+
+    const deletedProduct = await Product.findByIdAndDelete(productID);
+    if (!deletedProduct) {
+      res.status(404).send({ message: "Product Not found" });
+    }
+
+    res
+      .status(200)
+      .send({ message: "Product Deleeted Succesfully", deletedProduct });
+  } catch (error) {
+    console.log(error);
+    res.status(501).send({ message: "Internal Server Error" });
   }
-  res.status(200).send({
-    message: "product deleted.",
-    productID,
-  });
 });
 app.get("/main", (req, res) => {
   res.status(200).send("<h1>Main Application</h1>");
