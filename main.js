@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const dbConnection = require("./database");
 const Product = require("./Model/Product");
+const { default: mongoose } = require("mongoose");
 // console.log(process.env.PORT);
 const app = express();
 const PORT = process.env.PORT || 8000; // do not put semicolon on the env file
@@ -63,6 +64,19 @@ app.get("/product/:name", async (req, res) => {
   }
 });
 
+//  DELETE Product By id
+
+app.delete("/product/:id", (req, res) => {
+  const productID = req.params.id;
+  console.log(productID);
+  if (!mongoose.Types.ObjectId.isValid(productID)) {
+    return res.status(400).json({ message: "Prouduct ID is Invalid" });
+  }
+  res.status(200).send({
+    message: "product deleted.",
+    productID,
+  });
+});
 app.get("/main", (req, res) => {
   res.status(200).send("<h1>Main Application</h1>");
 });
