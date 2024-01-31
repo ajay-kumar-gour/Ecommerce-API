@@ -44,7 +44,7 @@ app.get("/product", async (req, res) => {
 
 // READ a data by a parameter example: id, name etc
 
-app.get("/product/:name", async (req, res) => {
+app.get("/product/name/:name", async (req, res) => {
   try {
     const name = req.params.name;
     console.log(name);
@@ -64,11 +64,35 @@ app.get("/product/:name", async (req, res) => {
   }
 });
 
+// GET Product by product ID
+
+app.get("/product/id/:id", async (req, res) => {
+  try {
+    const productID = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(productID)) {
+      return res.status(400).send({ message: "Product ID Invalid" });
+    }
+    const fetechedProduct = await Product.findById(productID);
+    console.log(fetechedProduct);
+
+    if (!fetechedProduct) {
+      return res.status(404).send({ message: "Product Not Found" });
+    }
+
+    res
+      .status(200)
+      .send({ message: "Product Found with given ID", fetechedProduct });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 //  DELETE Product By id
 
-app.delete("/product/:id", async (req, res) => {
+app.delete("/product/id/:id", async (req, res) => {
   try {
-    // const productID = req.params.id;
+    const productID = req.params.id;
     console.log(productID);
     if (!mongoose.Types.ObjectId.isValid(productID)) {
       return res.status(400).send({ message: "Prouduct ID is Invalid" });
