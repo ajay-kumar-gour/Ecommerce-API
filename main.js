@@ -87,7 +87,32 @@ app.get("/product/id/:id", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+// Update product by id
 
+app.put("/product/id/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    console.log(id);
+    const updatedData = req.body;
+    console.log(updatedData);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      res.status(400).send({ message: "Product ID is not valid" });
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+    if (!updatedProduct) {
+      res.status(404).send({ message: "Product not found" });
+    }
+
+    res.status(200).send({ message: "Product Updated", updatedProduct });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+    console.log(error);
+  }
+});
 //  DELETE Product By id
 
 app.delete("/product/id/:id", async (req, res) => {
