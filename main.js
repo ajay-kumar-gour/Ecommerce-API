@@ -136,17 +136,22 @@ app.delete("/product/id/:id", async (req, res) => {
     res.status(501).send({ message: "Internal Server Error" });
   }
 });
+
+// TEST Endpoints
 app.get("/main", (req, res) => {
   res.status(200).send("<h1>Main Application</h1>");
 });
-
+// TEST Endpoints
 app.get("/", (req, res) => {
   res.status(200).send("HOME PAGE");
 });
+
 //a middleware used without any path , it means it will catch all routes for undefined routes.
 app.use((req, res) => {
   res.status(401).send("Page NOT Found !!");
 });
+
+// Server listen on
 app.listen(PORT, () => {
   console.log(`Server is up and is listening on PORT ${PORT}`);
 });
