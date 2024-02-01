@@ -3,12 +3,37 @@ require("dotenv").config();
 
 const dbConnection = require("./database");
 const Product = require("./Model/Product");
-const { default: mongoose } = require("mongoose");
+const User = require("./Model/User");
+const mongoose = require("mongoose");
 // console.log(process.env.PORT);
 const app = express();
 const PORT = process.env.PORT || 8000; // do not put semicolon on the env file
 app.use(express.json());
 console.log(PORT);
+
+// CREATE User
+
+app.post("/register/user", async (req, res) => {
+  try {
+    const user = req.body;
+    console.log(user);
+    const email = user.email;
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).send({ message: "User already exists" });
+    }
+
+    const newUser = new User(user);
+    const createdUser = await newUser.save();
+    res
+      .status(201)
+      .send({ message: "User registered successfuly", createdUser });
+  } catch (error) {
+    console.log(error);
+    res.send(500).status({ message: "Internal Server Error" });
+  }
+});
 
 // CREATE (POST) Data
 app.post("/product", async (req, res) => {
