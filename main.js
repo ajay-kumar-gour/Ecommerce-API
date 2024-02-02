@@ -2,7 +2,6 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 require("dotenv").config();
-
 const dbConnection = require("./database");
 const Product = require("./Model/Product");
 const User = require("./Model/User");
@@ -11,83 +10,84 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 8000; // do not put semicolon on the env file
 
-const SECRET = process.env.SECRET;
+const userRoutes = require("./Routes/userRoutes");
 app.use(express.json());
 console.log(PORT);
 
+app.use("/users", userRoutes);
 // CREATE User
 
-app.post("/register/user", async (req, res) => {
-  try {
-    const user = req.body;
-    const { Firstname, Lastname, username, email, password } = req.body;
-    console.log(user);
-    const salt = 10;
-    const hashedPWD = await bcrypt.hash(password, salt);
-    const existingUser = await User.findOne({ email });
+// app.post("/register/user", async (req, res) => {
+//   try {
+//     const user = req.body;
+//     const { Firstname, Lastname, username, email, password } = req.body;
+//     console.log(user);
+//     const salt = 10;
+//     const hashedPWD = await bcrypt.hash(password, salt);
+//     const existingUser = await User.findOne({ email });
 
-    if (existingUser) {
-      return res.status(409).send({ message: "User already exists" });
-    }
+//     if (existingUser) {
+//       return res.status(409).send({ message: "User already exists" });
+//     }
 
-    const newUser = new User({
-      Firstname,
-      Lastname,
-      username,
-      email,
-      password: hashedPWD,
-    });
-    const createdUser = await newUser.save();
-    res
-      .status(201)
-      .send({ message: "User registered successfuly", createdUser });
-  } catch (error) {
-    console.log(error);
-    res.send(500).status({ message: "Internal Server Error" });
-  }
-});
+//     const newUser = new User({
+//       Firstname,
+//       Lastname,
+//       username,
+//       email,
+//       password: hashedPWD,
+//     });
+//     const createdUser = await newUser.save();
+//     res
+//       .status(201)
+//       .send({ message: "User registered successfuly", createdUser });
+//   } catch (error) {
+//     console.log(error);
+//     res.send(500).status({ message: "Internal Server Error" });
+//   }
+// });
 
 // GET all Users
 
-app.get("/users", async (req, res) => {
-  try {
-    const users = await User.find();
-    if (users.length < 0) {
-      return res.status(404).send({ message: "No Users Found" });
-    }
-    res
-      .status(200)
-      .send({ message: "success", TotalUsers: users.length, users });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Internal Server Error" });
-  }
-});
+// app.get("/users", async (req, res) => {
+//   try {
+//     const users = await User.find();
+//     if (users.length < 0) {
+//       return res.status(404).send({ message: "No Users Found" });
+//     }
+//     res
+//       .status(200)
+//       .send({ message: "success", TotalUsers: users.length, users });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({ message: "Internal Server Error" });
+//   }
+// });
 
 // LOGIN User
 
-app.post("/login/user", async (req, res) => {
-  try {
-    const { email, password } = req.body;
+// app.post("/login/user", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+//     const user = await User.findOne({ email });
 
-    if (!user) {
-      return res.status(401).send({ message: "Invalid email or password" });
-    }
+//     if (!user) {
+//       return res.status(401).send({ message: "Invalid email or password" });
+//     }
 
-    const pwdMatch = await bcrypt.compare(password, user.password);
-    if (!pwdMatch) {
-      return res.status(401).send({ message: "Invalid email or password" });
-    }
-    const token = jsonwebtoken.sign({}, SECRET);
+//     const pwdMatch = await bcrypt.compare(password, user.password);
+//     if (!pwdMatch) {
+//       return res.status(401).send({ message: "Invalid email or password" });
+//     }
+//     const token = jsonwebtoken.sign({}, SECRET);
 
-    res.status(200).send({ message: "Login Successfully", token, user });
-  } catch (erorr) {
-    console.log(erorr);
-    res.status(500).send({ message: "Internal Server Error" });
-  }
-});
+//     res.status(200).send({ message: "Login Successfully", token, user });
+//   } catch (erorr) {
+//     console.log(erorr);
+//     res.status(500).send({ message: "Internal Server Error" });
+//   }
+// });
 
 // CREATE (POST) Data
 app.post("/product", async (req, res) => {
