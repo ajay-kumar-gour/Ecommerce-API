@@ -61,6 +61,30 @@ app.get("/users", async (req, res) => {
   }
 });
 
+// LOGIN User
+
+app.post("/login/user", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).send({ message: "Invalid email or password" });
+    }
+
+    const pwdMatch = await bcrypt.compare(password, user.password);
+    if (!pwdMatch) {
+      return res.status(401).send({ message: "Invalid email or password" });
+    }
+
+    res.status(200).send({ message: "Login Successfully", user });
+  } catch (erorr) {
+    console.log(erorr);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 // CREATE (POST) Data
 app.post("/product", async (req, res) => {
   try {
