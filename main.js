@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jsonwebtoken = require("jsonwebtoken");
 require("dotenv").config();
 
 const dbConnection = require("./database");
@@ -9,6 +10,8 @@ const mongoose = require("mongoose");
 // console.log(process.env.PORT);
 const app = express();
 const PORT = process.env.PORT || 8000; // do not put semicolon on the env file
+
+const SECRET = process.env.SECRET;
 app.use(express.json());
 console.log(PORT);
 
@@ -77,8 +80,9 @@ app.post("/login/user", async (req, res) => {
     if (!pwdMatch) {
       return res.status(401).send({ message: "Invalid email or password" });
     }
+    const token = jsonwebtoken.sign({}, SECRET);
 
-    res.status(200).send({ message: "Login Successfully", user });
+    res.status(200).send({ message: "Login Successfully", token, user });
   } catch (erorr) {
     console.log(erorr);
     res.status(500).send({ message: "Internal Server Error" });
