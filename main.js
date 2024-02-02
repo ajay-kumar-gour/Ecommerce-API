@@ -44,6 +44,23 @@ app.post("/register/user", async (req, res) => {
   }
 });
 
+// GET all Users
+
+app.get("/users", async (req, res) => {
+  try {
+    const users = await User.find();
+    if (users.length < 0) {
+      return res.status(404).send({ message: "No Users Found" });
+    }
+    res
+      .status(200)
+      .send({ message: "success", TotalUsers: users.length, users });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 // CREATE (POST) Data
 app.post("/product", async (req, res) => {
   try {
