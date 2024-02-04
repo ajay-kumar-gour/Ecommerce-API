@@ -57,10 +57,10 @@ const productController = {
         name: { $regex: new RegExp(name, "i") },
       });
       if (!data) {
-        return res.status(400).send({ error: "Product Not found" });
+        return res.status(400).send({ message: "Product Not found" });
       }
       if (data.length == 0) {
-        return res.status(400).send({ error: "Product Not found" });
+        return res.status(400).send({ message: "Product Not found" });
       }
       res.status(200).json(data);
     } catch (error) {
@@ -83,13 +83,13 @@ const productController = {
         runValidators: true,
       });
       if (!updatedProduct) {
-        res.status(404).send({ message: "Product not found" });
+        return res.status(404).send({ message: "Product not found" });
       }
 
       res.status(200).send({ message: "Product Updated", updatedProduct });
     } catch (error) {
-      res.status(500).send({ message: "Internal Server Error" });
       console.log(error);
+      return res.status(500).send({ message: "Internal Server Error" });
     }
   },
   deleteProductByID: async (req, res) => {
