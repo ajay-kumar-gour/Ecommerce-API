@@ -73,6 +73,32 @@ This Node.js API serves as the backend for an e-commerce application. It provide
 - Mongoose
 - JSON Web Token (JWT) for authentication
 - Bcrypt for password hashing
+## Data Models
+
+### Product Model
+
+The product model represents the structure of a product in the e-commerce application.
+
+#### Fields:
+
+- **name** (String, required): The name of the product.
+- **description** (String): A brief description of the product.
+- **price** (String, required): The price of the product.
+- **stock** (String, required): The available stock quantity.
+
+### User Model
+
+The user model defines the structure for user data in the e-commerce system.
+
+#### Fields:
+
+- **Firstname** (String, required): The first name of the user.
+- **Lastname** (String, required): The last name of the user.
+- **username** (String, required): The unique username of the user.
+- **email** (String, required, unique): The email address of the user (must be unique).
+- **password** (String, required): The hashed password for user authentication.
+
+Both models include timestamp fields for tracking the creation and update times.
 
 ## Installation
 
