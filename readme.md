@@ -168,6 +168,11 @@ Both models include timestamp fields for tracking the creation and update times.
    ```bash
    npm start
    ```
+## Screenshots
+![POSTMAN](https://github.com/ajay-kumar-gour/Ecommerce-API/assets/153515139/db9f3bd2-58db-45e1-9cb5-4aef0205b2db)
+
+![VS](https://github.com/ajay-kumar-gour/Ecommerce-API/assets/153515139/af0b0672-15d1-4adc-b9bb-a04e64f3dd0a)
+
 
 ## Usage
 
