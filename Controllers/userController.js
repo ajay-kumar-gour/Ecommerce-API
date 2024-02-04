@@ -49,9 +49,13 @@ const userController = {
       if (!pwdMatch) {
         return res.status(401).send({ message: "Invalid email or password" });
       }
-      const token = jsonwebtoken.sign({ user }, SECRET);
+      const accessToken = jsonwebtoken.sign({ user }, SECRET, {
+        expiresIn: "30m",
+      });
 
-      res.status(200).send({ message: "Login Successfully", token, user });
+      res
+        .status(200)
+        .send({ message: "Login Successfully", accessToken, user });
     } catch (erorr) {
       console.log(erorr);
       res.status(500).send({ message: "Internal Server Error" });
