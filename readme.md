@@ -73,6 +73,7 @@ This Node.js API serves as the backend for an e-commerce application. It provide
 - Mongoose
 - JSON Web Token (JWT) for authentication
 - Bcrypt for password hashing
+
 ## Data Models
 
 ### Product Model
@@ -85,6 +86,32 @@ The product model represents the structure of a product in the e-commerce applic
 - **description** (String): A brief description of the product.
 - **price** (String, required): The price of the product.
 - **stock** (String, required): The available stock quantity.
+
+#### Sample Product Data
+
+    ```json
+    {
+        "_id": "65b903f00f2624a971201ced",
+        "name": "Apple iPhone",
+        "description": "Premium smartphone with the latest features",
+        "price": "One lakh and fifty thousand only",
+        "stock": "100",
+    },
+    {
+        "_id": "65b903f00f2624a971201cee",
+        "name": "Google Pixel",
+        "description": "High-quality camera and performance",
+        "price": "Eighty thousand only",
+        "stock": "180",
+    },
+    {
+        "_id": "65b903f00f2624a971201cef",
+        "name": "Sony Xperia",
+        "description": "Sleek and stylish design with top-notch features",
+        "price": "Seventy-five thousand only",
+        "stock": "120",
+    }
+    ```
 
 ### User Model
 
@@ -110,23 +137,24 @@ Both models include timestamp fields for tracking the creation and update times.
    ```
 
 2. **Install dependencies:**
-  
+
    ```bash
    cd e-commerce-node-api
    npm install
 
    ```
+
 3. **Set up environment variables:**
    Create a .env file in the root directory and configure your MongoDB connection string and other necessary variables.
 
-    ```bash
-    PORT=8000
-    MONGO_URI=mongodb://localhost:27017/e_commerce_db
-    SECRET=your_secret_key
-    ```
+   ```bash
+   PORT=8000
+   MONGO_URI=mongodb://localhost:27017/e_commerce_db
+   SECRET=your_secret_key
+   ```
 
 4. **Run the application:**
 
-    ```bash
-    npm start
-    ```
+   ```bash
+   npm start
+   ```
