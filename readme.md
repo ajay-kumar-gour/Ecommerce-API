@@ -89,7 +89,6 @@ The product model represents the structure of a product in the e-commerce applic
 
 #### Sample Product Data
 
-    ```json
     {
         "_id": "65b903f00f2624a971201ced",
         "name": "Apple iPhone",
@@ -111,7 +110,6 @@ The product model represents the structure of a product in the e-commerce applic
         "price": "Seventy-five thousand only",
         "stock": "120",
     }
-    ```
 
 ### User Model
 
@@ -124,6 +122,18 @@ The user model defines the structure for user data in the e-commerce system.
 - **username** (String, required): The unique username of the user.
 - **email** (String, required, unique): The email address of the user (must be unique).
 - **password** (String, required): The hashed password for user authentication.
+
+#### Sample User Data
+
+        {
+            "_id": "65bbe4d2e9c6c2a36cdd326c",
+            "Firstname": "TEST",
+            "Lastname": "TEST",
+            "username": "TEST",
+            "email": "TEST@example.com",
+            "password": "$2b$10$6u.hwIpvazG5Fk144AZb/uzTm4FbqUyU9jSQrZ8uyTSb3JnNuWcKG",
+
+        }
 
 Both models include timestamp fields for tracking the creation and update times.
 
