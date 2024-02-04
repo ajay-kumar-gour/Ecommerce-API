@@ -168,3 +168,55 @@ Both models include timestamp fields for tracking the creation and update times.
    ```bash
    npm start
    ```
+
+## Usage
+
+1. **Ensure MongoDB is running.**
+
+2. **Interact with Endpoints:**
+   - Use API testing tools like Postman to interact with the available endpoints.
+
+   - **Create Product:**
+     - Endpoint: `POST /product`
+     - Payload: Provide product details in the request body.
+
+   - **Get All Products:**
+     - Endpoint: `GET /product`
+
+   - **Get Product by Name:**
+     - Endpoint: `GET /product/name/:name`
+     - Replace `:name` with the desired product name.
+
+   - **Get Product by ID:**
+     - Endpoint: `GET /product/id/:id`
+     - Replace `:id` with the desired product ID.
+
+   - **Update Product by ID:**
+     - Endpoint: `PUT /product/id/:id`
+     - Replace `:id` with the desired product ID. Provide updated details in the request body.
+
+   - **Delete Product by ID:**
+     - Endpoint: `DELETE /product/id/:id`
+     - Replace `:id` with the ID of the product to be deleted.
+
+   - **Register User:**
+     - Endpoint: `POST /register/user`
+     - Payload: Provide user details in the request body.
+
+   - **Login User:**
+     - Endpoint: `POST /login/user`
+     - Payload: Provide login credentials in the request body.
+
+   - **Get All Users:**
+     - Endpoint: `GET /users`
+
+3. **Explore and Test:**
+   - Explore other endpoints and test different scenarios using the provided API.
+
+## Contributions
+
+Contributions are welcome! If you have suggestions, found issues, or want to add new features, feel free to open issues or submit pull requests. Let's make this project better together!
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
