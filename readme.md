@@ -84,21 +84,23 @@ This Node.js API serves as the backend for an e-commerce application. It provide
    ```
 
 2. **Install dependencies:**
+  
    ```bash
    cd e-commerce-node-api
    npm install
+
    ```
 3. **Set up environment variables:**
    Create a .env file in the root directory and configure your MongoDB connection string and other necessary variables.
 
-```bash
-PORT=8000
-MONGO_URI=mongodb://localhost:27017/e_commerce_db
-SECRET=your_secret_key
-```
+    ```bash
+    PORT=8000
+    MONGO_URI=mongodb://localhost:27017/e_commerce_db
+    SECRET=your_secret_key
+    ```
 
 4. **Run the application:**
 
-```bash
-npm start
-```
+    ```bash
+    npm start
+    ```
