@@ -8,15 +8,17 @@ const PORT = process.env.PORT || 8000; // do not put semicolon on the env file
 
 const userRoutes = require("./Routes/userRoutes");
 const productRoutes = require("./Routes/productRoutes");
+const defaultRoutes = require("./Routes/defaultRoutes");
 app.use(express.json());
 
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
+app.use("/", defaultRoutes);
 // app.use("/products",authenticateToken, productRoutes);
 
 //a middleware used without any path , it means it will catch all routes for undefined routes.
 app.use((req, res) => {
-  res.status(401).send("Page NOT Found !!");
+  res.status(401).send({ message: "Page NOT FOUND !!" });
 });
 
 // Server listen on
