@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Node.js API serves as the backend for an e-commerce application. It provides endpoints for managing products and user authentication.
+This Node.js API serves as the backend for an e-commerce( majorly related to mobile phones )application. It provides endpoints for managing products and user authentication.
 
 ## Features
 
