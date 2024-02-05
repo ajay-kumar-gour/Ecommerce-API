@@ -4,6 +4,7 @@
 
 This Node.js API serves as the backend for an e-commerce( majorly related to mobile phones )application. It provides endpoints for managing products and user authentication.
 
+#### Live application hosted and deployed here : https://phonesphere.onrender.com
 ## Features
 
 - **Product Management:**
